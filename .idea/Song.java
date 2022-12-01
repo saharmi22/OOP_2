@@ -10,12 +10,16 @@ import OOP.Provided.User.*;
  */
 public interface Song extends Comparable<Song> {
 
+    private int song_id;
+
 
     /**
      *
      * @return Song's ID
      */
-    int getID();
+    int getID(){
+        return this.song_id;
+    }
 
     /**
      *
