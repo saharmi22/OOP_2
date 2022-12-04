@@ -1,3 +1,7 @@
+package OOP.Solution;
+
+import OOP.Provided.User;
+import OOP.Provided.Song;
 import java.util.*;
 
 public class UserImpl implements User {

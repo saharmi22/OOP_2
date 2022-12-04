@@ -3,23 +3,19 @@ package OOP.Provided;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
-import OOP.Provided.User.*;
+import OOP.Provided.User;
 
 /**
  * Created by rajaee050 on 3/19/2018.
  */
 public interface Song extends Comparable<Song> {
 
-    private int song_id;
-
 
     /**
      *
      * @return Song's ID
      */
-    int getID(){
-        return this.song_id;
-    }
+    int getID();
 
     /**
      *
