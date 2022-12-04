@@ -94,6 +94,5 @@ public interface User extends Comparable<User>{
      *  the number of friend's rated songs >
      */
     Map<User,Integer> getFriends();
-
-
 }
+
