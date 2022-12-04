@@ -1,20 +1,20 @@
 package OOP.Provided;
+
 import java.util.Collection;
 import java.util.Comparator;
-
-import OOP.Provided.Song;
-import OOP.Provided.User;
+import OOP.Provided.Song.*;
+import OOP.Provided.User.*;
 import java.util.Set;
 
 /**
  * Created by rajaee050 on 3/19/2018.
  */
-//public interface TechnionTunes extends Iterable<Song> {
+public interface TechnionTunes extends Iterable<Song> {
 
-    //class UserAlreadyExists extends Exception {}
-    //class UserDoesntExist extends Exception {}
-    //class SongAlreadyExists extends Exception {}
-    //class SongDoesntExist extends Exception {}
+    class UserAlreadyExists extends Exception {}
+    class UserDoesntExist extends Exception {}
+    class SongAlreadyExists extends Exception {}
+    class SongDoesntExist extends Exception {}
 
 
     /**
@@ -24,7 +24,7 @@ import java.util.Set;
      * @param userName
      * @param userAge
      */
-    //void addUser(int userID , String userName , int userAge) throws UserAlreadyExists;
+    void addUser(int userID , String userName , int userAge) throws UserAlreadyExists;
 	
 	/**
      *
@@ -32,7 +32,7 @@ import java.util.Set;
      * @throws UserDoesntExist if there is no user with such ID number.
 	 * @return a reference to the user 
      */
-	//User getUser(int id) throws UserDoesntExist;
+	User getUser(int id) throws UserDoesntExist;
 
     /**
      *
@@ -41,7 +41,7 @@ import java.util.Set;
      * @throws AlreadyFriends if they were frineds before.
 	 * @throws UserDoesntExist if at least one of the users didn't exist in the system.
      */
-    //void makeFriends(int id1, int id2) throws  UserDoesntExist , AlreadyFriends , SamePerson;
+    void makeFriends(int id1, int id2) throws  UserDoesntExist , AlreadyFriends, SamePerson;
 
 
     /**
@@ -52,7 +52,7 @@ import java.util.Set;
      * @param SingerName
      * @throws SongAlreadyExists if it has been added before
      */
-    //void addSong(int songID , String songName , int length ,String SingerName) throws SongAlreadyExists ;
+    void addSong(int songID , String songName , int length ,String SingerName) throws SongAlreadyExists ;
 	
 	/**
      *
@@ -60,7 +60,7 @@ import java.util.Set;
      * @throws SongDoesntExist if there is no song with such ID number.
 	 * @return a reference to the song 
      */
-	//Song getSong(int id) throws SongDoesntExist;
+	Song getSong(int id) throws SongDoesntExist;
 
     /**
      *
@@ -72,7 +72,7 @@ import java.util.Set;
      * @throws SongAlreadyRated
      * @throws IllegalRateValue
      */
-    //void rateSong(int userId, int songId, int rate)throws UserDoesntExist,SongDoesntExist,IllegalRateValue,SongAlreadyRated;
+    void rateSong(int userId, int songId, int rate)throws UserDoesntExist,SongDoesntExist, IllegalRateValue, SongAlreadyRated;
 
 
     /**
@@ -81,7 +81,7 @@ import java.util.Set;
      * @return set ( not ordered ) that contains all the songs that all the given users rated.
      * @throws UserDoesntExist
      */
-    //Set<Song> getIntersection(int IDs[]) throws UserDoesntExist ;
+    Set<Song> getIntersection(int IDs[]) throws UserDoesntExist ;
 
 
     /**
@@ -89,7 +89,7 @@ import java.util.Set;
      * @param comp
      * @return collection of songs sorted according to comp
      */
-    //Collection<Song> sortSongs(Comparator<Song> comp);
+    Collection<Song> sortSongs(Comparator<Song> comp);
 
 
     /**
@@ -100,7 +100,7 @@ import java.util.Set;
      *  2- by length (from higher to lower )
      *  3- by ID (from lower to higher )
      */
-    //Collection<Song> getHighestRatedSongs(int num);
+    Collection<Song> getHighestRatedSongs(int num);
 
     /**
      *
@@ -110,7 +110,7 @@ import java.util.Set;
      *  2- by length ( from lower to higher )
      *  3- by ID ( from higher to lower) .
      */
-    //Collection<Song> getMostRatedSongs(int num);
+    Collection<Song> getMostRatedSongs(int num);
 
     /**
      *
@@ -120,7 +120,7 @@ import java.util.Set;
      *  2- by age ( from higher to lower)
      *  3- by ID ( from lower to higher )
      */
-    //Collection<User> getTopLikers(int num);
+    Collection<User> getTopLikers(int num);
 
     /**
      *
@@ -137,5 +137,5 @@ import java.util.Set;
      *  the system's friendship graph that every two adjacent friends in the path can gets along.
      *
      */
-    //boolean canGetAlong(int userId1, int userId2) throws UserDoesntExist;
-//}
+    boolean canGetAlong(int userId1, int userId2) throws UserDoesntExist;
+}
