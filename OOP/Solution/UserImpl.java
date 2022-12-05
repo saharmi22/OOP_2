@@ -5,11 +5,11 @@ import OOP.Provided.Song;
 import java.util.*;
 
 public class UserImpl implements User {
-    private int user_id;
-    private String user_name;
-    private int user_age;
-    private HashMap<Integer, TreeSet<Song>> rated_songs;
-    private LinkedList<User> friends;
+    private final int user_id;
+    private final String user_name;
+    private final int user_age;
+    private final HashMap<Integer, TreeSet<Song>> rated_songs;
+    private final LinkedList<User> friends;
 
     public UserImpl(int userId, String userName, int userAge) {
         user_id = userId;
@@ -109,8 +109,11 @@ public class UserImpl implements User {
     public Collection<Song> getFavoriteSongs() {
         LinkedList<Song> favorite_songs = new LinkedList<>();
         for (int i=8; i<=10; i++){
-            SortedSet<Song> set_rate = rated_songs.get(i);
-            favorite_songs.addAll(set_rate);
+            if (rated_songs.containsKey(i)){
+                SortedSet<Song> set_rate = rated_songs.get(i);
+                favorite_songs.addAll(set_rate);
+            }
+
         }
         favorite_songs.sort(Comparator.comparingInt(Song::getID));
         return favorite_songs;
@@ -128,11 +131,13 @@ public class UserImpl implements User {
     }
 
     public boolean favoriteSongInCommon(User user){
-        Collection<Song> favorite_songs = this.getFavoriteSongs();
-        Collection<Song> favorite_songs_user = user.getFavoriteSongs();
-        for (Song song : favorite_songs) {
-            if (favorite_songs_user.contains(song))
-                return true;
+        if (user.getFriends().containsKey(this) && friends.contains(user)){
+            Collection<Song> favorite_songs = this.getFavoriteSongs();
+            Collection<Song> favorite_songs_user = user.getFavoriteSongs();
+            for (Song song : favorite_songs) {
+                if (favorite_songs_user.contains(song))
+                    return true;
+            }
         }
         return false;
     }
@@ -149,5 +154,13 @@ public class UserImpl implements User {
     @Override
     public int compareTo(User user) {
         return this.user_id-user.getID();
+    }
+
+    @Override
+    public boolean equals (Object o){
+        if(o instanceof User){
+            return ((User) o).getID() == this.user_id;
+        }
+        return false;
     }
 }
