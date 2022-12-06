@@ -18,6 +18,14 @@ public class SongImpl implements Song{
         this.userRateMap = new HashMap<>();
     }
 
+    public SongImpl(Song song){
+        this.song_id = song.getID();
+        this.length = song.getLength();
+        this.songName = song.getName(); //strings in java are immutable so it's safe
+        this.singerName = song.getSingerName();
+        this.userRateMap = new HashMap<>();
+    }
+
     public int getID(){
         return this.song_id;
     }

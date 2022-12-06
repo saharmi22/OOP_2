@@ -153,7 +153,7 @@ public class UserImpl implements User {
 
     @Override
     public int compareTo(User user) {
-        return this.user_id-user.getID();
+        return this.user_id - user.getID();
     }
 
     @Override
