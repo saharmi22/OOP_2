@@ -107,7 +107,7 @@ public class SongImpl implements Song{
 
 
     @Override
-    public int compareTo(Song song){ return this.song_id-song.getID();}
+    public int compareTo(Song song){ return this.song_id - song.getID();}
 
     @Override
     public boolean equals (Object o){

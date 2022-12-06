@@ -3,7 +3,7 @@ package OOP.Provided;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
-import OOP.Provided.User;
+import OOP.Provided.User.*;
 
 /**
  * Created by rajaee050 on 3/19/2018.

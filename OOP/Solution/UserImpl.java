@@ -8,9 +8,10 @@ public class UserImpl implements User {
     private final int user_id;
     private final String user_name;
     private final int user_age;
-    private final HashMap<Integer, TreeSet<Song>> rated_songs;
+    private final HashMap<Integer, TreeSet<Song>> rated_songs; //key is rate and value is set of songs rated that num
     private final LinkedList<User> friends;
 
+    //constructor
     public UserImpl(int userId, String userName, int userAge) {
         user_id = userId;
         user_name = userName;
@@ -36,6 +37,7 @@ public class UserImpl implements User {
             throw new IllegalRateValue();
         }
         boolean song_exists = false;
+        //check if song is rated by checking sets for all rates
         for (int i = 0; (i <= 10 && !song_exists); i++) {
             if (rated_songs.containsKey(i)){
                 TreeSet<Song> songs_rated_i = rated_songs.get(i);
@@ -49,7 +51,8 @@ public class UserImpl implements User {
         if (rated_songs.containsKey(rate)){
             TreeSet<Song> songs_rate = rated_songs.get(rate);
             songs_rate.add(song);
-        } else {
+        } else { //first song rated (rate)
+            //create new set for key rat in hashmap
             TreeSet<Song> new_song_set = new TreeSet<>();
             new_song_set.add(song);
             rated_songs.put(rate, new_song_set);
@@ -60,9 +63,11 @@ public class UserImpl implements User {
     public double getAverageRating() {
         int sum = 0;
         int cnt = 0;
+        //go over all items in map and calc sum rates and num of songs overall
         for (int rate = 0; rate <= 10; rate++) {
             if (rated_songs.containsKey(rate)){
                 TreeSet<Song> set_rate = rated_songs.get(rate);
+                //in set_rate all songs are rated (rate)
                 sum += rate * set_rate.size();
                 cnt += set_rate.size();
             }
@@ -75,6 +80,7 @@ public class UserImpl implements User {
 
     public int getPlaylistLength() {
         int sum_length = 0;
+        //summing song lengths from all rate-sets
         for (int rate = 0; rate <= 10; rate++) {
             if (rated_songs.containsKey(rate)){
                 TreeSet<Song> set_rate = rated_songs.get(rate);
@@ -100,6 +106,7 @@ public class UserImpl implements User {
                     int id_diff = song1.getID() - song2.getID();
                     return -id_diff;
                 });
+                //adding one rate at a time so that order by rate will be saved as instructed
                 sorted_rated_songs.addAll(sorted_rated_songs_rate);
             }
         }
@@ -108,6 +115,7 @@ public class UserImpl implements User {
 
     public Collection<Song> getFavoriteSongs() {
         LinkedList<Song> favorite_songs = new LinkedList<>();
+        //adding all favorite songs to one list
         for (int i=8; i<=10; i++){
             if (rated_songs.containsKey(i)){
                 SortedSet<Song> set_rate = rated_songs.get(i);
@@ -115,6 +123,7 @@ public class UserImpl implements User {
             }
 
         }
+        //sorting by id as requested
         favorite_songs.sort(Comparator.comparingInt(Song::getID));
         return favorite_songs;
     }
@@ -134,6 +143,7 @@ public class UserImpl implements User {
         if (user.getFriends().containsKey(this) && friends.contains(user)){
             Collection<Song> favorite_songs = this.getFavoriteSongs();
             Collection<Song> favorite_songs_user = user.getFavoriteSongs();
+            //check if there is a favorite song of this that is in user's favorites
             for (Song song : favorite_songs) {
                 if (favorite_songs_user.contains(song))
                     return true;
@@ -144,6 +154,7 @@ public class UserImpl implements User {
 
     public Map<User,Integer> getFriends(){
         Map<User,Integer> friends_map = new HashMap<>();
+        //adding to the empty map all friend and how many songs they rated
         for (User friend : friends) {
             Collection<Song> rated_songs_friend = friend.getRatedSongs();
             friends_map.put(friend, rated_songs_friend.size());
